@@ -70,12 +70,12 @@ function renderWeatherInfo(data) {
 
     
     cityName.innerText = `${data?.name}`;
-    temp.innerText = `${data?.main?.temp} degree`;
+    temp.innerText = `${data?.main?.temp} °C`;
     icon.src = `https://openweathermap.org/img/wn/${data?.weather[0].icon}@2x.png`
     desc.innerText = `${data?.weather[0].description}`
-    windSpeed.innerText = `${data?.wind?.speed}`;
-    humidity.innerText  = `${data?.main?.humidity}`;
-    cloudiness.innerText = `${data?.clouds?.all}`
+    windSpeed.innerText = `${data?.wind?.speed} m/s`;
+    humidity.innerText  = `${data?.main?.humidity}%`;
+    cloudiness.innerText = `${data?.clouds?.all}%`
 }
 
 const formContainer = document.querySelector("[data-searchForm]");
