@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- header section -->
+        <div class="header">
+            <h1>Weather Dashboard</h1>
+        </div>
+
+        <div class="main-container">
+            <!-- search weather div -->
+            <div class="sidebar">
+                <!-- search div -->
+                <label>Enter a city name</label>
+                <form class="form-container" data-searchForm>
+                    <input placeholder="search for city..." data-searchInput />
+                    <button type="submit">
+                        <img src="./assets/search.png" alt="" width="20" height="20" loading="lazy" />
+                    </button>
+                </form>
+
+                <!-- use current location -->
+                <button class="your-location-btn btn-full">Use your Current Location</button>
+            </div>
+
+            <!-- display weather wrapper -->
+            <div class="display-weather-wrapper">
+
+                <div class="grant-location-container active">
+                    <img src="./assets/location.png" alt="" width="80" height="80" loading="lazy">
+                    <p>Grant Location Access</p>
+                    <p>Allow Access to get weather information</p>
+                    <button class="your-location-btn" data-grantAccess>grant access</button>
+                </div>
+
+                <!-- loading screen container -->
+                <div class="loading-container">
+                    <img src="./assets/loading.gif" alt="" width="200" height="200" />
+                    <p>loading..</p>
+                </div>
+
+
+                <div class="display-weather">
+                    <div class="weather-main">
+                        <div class="left">
+                            <h1 data-cityName>Kolkata</h1>
+                            <p data-temp>36</p>
+                        </div>
+                        <div class="right">
+                            <img class="weather-icon" data-weatherIcon src="" alt="img">
+                            <p data-weatherDesc>Haze</p>
+                        </div>
+                    </div>
+                    <div class="weather-widget">
+                        <!-- wind info -->
+                        <div class="card">
+                            <img class="weather-icon" src="./assets/wind.png" alt="">
+                            <p>wind</p>
+                            <p data-windSpeed></p>
+                        </div>
+                        <!-- humidity info -->
+                        <div class="card">
+                            <img class="weather-icon" src="./assets/humidity.png" alt="">
+                            <p>humidity</p>
+                            <p data-humidity></p>
+                        </div>
+                        <!-- cloud info -->
+                        <div class="card">
+                            <img class="weather-icon" src="./assets/cloud.png" alt="">
+                            <p>cloud</p>
+                            <p data-cloudiness></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Javavscript -->
+    <script src="./script.js"></script>
+</body>
+
+</html>
