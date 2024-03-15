@@ -43,6 +43,7 @@ async function fetchUserdata(data) {
     // calling the api
     try {
         grantLocationContainer.classList.remove("active");
+        displayWeatherContainer.classList.remove("active");
         loadingContainer.classList.add("active");
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
         const data = await response.json();
@@ -95,6 +96,7 @@ async function fetchdata(data){
     console.log("Fetching weather");
     try {
         grantLocationContainer.classList.remove("active");
+        displayWeatherContainer.classList.remove("active");
         loadingContainer.classList.add("active");
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
         const data = await response.json();
