@@ -22,7 +22,7 @@ function getLocation(){
             }
 
             sessionStorage.setItem("userLocation", JSON.stringify(userCord));
-            fetchUserWeatherInfo(userCord);
+            fetchUserdata(userCord);
         })
     }
 }
@@ -33,14 +33,13 @@ function isAllowed() {
         getLocation();
     }
     else {
-        fetchUserWeatherInfo(JSON.parse(userLocation));
+        fetchUserdata(JSON.parse(userLocation));
     }
 }
 
-async function fetchUserWeatherInfo(data) {
+async function fetchUserdata(data) {
     const {lat, lon} = data;
-    console.log(data);
-    console.log("called");
+
     // calling the api
     try {
         grantLocationContainer.classList.remove("active");
@@ -51,31 +50,32 @@ async function fetchUserWeatherInfo(data) {
         loadingContainer.classList.remove("active");
         displayWeatherContainer.classList.add("active");
         // console.log(data);
-        renderWeatherInfo(data);
+        renderdata(data);
 
     }catch(err){
 
     }
 }
 
-function renderWeatherInfo(data) {
-    console.log("called");
+function renderdata(data) {
+
     const cityName = document.querySelector("[data-cityName]");
-    const temp = document.querySelector("[data-temp]");
-    const icon = document.querySelector("[data-weatherIcon]");
     const desc = document.querySelector("[data-weatherDesc]");
-    const windSpeed = document.querySelector("[data-windSpeed]");
+    const weatherIcon = document.querySelector("[data-weatherIcon]");
+    const temp = document.querySelector("[data-temp]");
+    const windspeed = document.querySelector("[data-windSpeed]");
     const humidity = document.querySelector("[data-humidity]");
     const cloudiness = document.querySelector("[data-cloudiness]");
 
-    
-    cityName.innerText = `${data?.name}`;
+    //fetch values from the weather info object and put it UI elements
+
+    cityName.innerText = data?.name;
+    desc.innerText = data?.weather?.[0]?.description;
+    weatherIcon.src = `https://openweathermap.org/img/wn/${data?.weather?.[0]?.icon}@2x.png`;
     temp.innerText = `${data?.main?.temp} °C`;
-    icon.src = `https://openweathermap.org/img/wn/${data?.weather[0].icon}@2x.png`
-    desc.innerText = `${data?.weather[0].description}`
-    windSpeed.innerText = `${data?.wind?.speed} m/s`;
-    humidity.innerText  = `${data?.main?.humidity}%`;
-    cloudiness.innerText = `${data?.clouds?.all}%`
+    windspeed.innerText = `${data?.wind?.speed}m/s`;
+    humidity.innerText = `${data?.main?.humidity}%`;
+    cloudiness.innerText = `${data?.clouds?.all}%`;
 }
 
 const formContainer = document.querySelector("[data-searchForm]");
@@ -87,22 +87,22 @@ formContainer.addEventListener("submit", (e) => {
     console.log(inputData);
     if(inputData === "") return;
 
-    fetchWeatherInfo(inputData);
+    fetchdata(inputData);
 })
 
-async function fetchWeatherInfo(data){
+async function fetchdata(data){
     const city = data;
     console.log("Fetching weather");
     try {
         grantLocationContainer.classList.remove("active");
         loadingContainer.classList.add("active");
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`);
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
         const data = await response.json();
 
         loadingContainer.classList.remove("active");
         displayWeatherContainer.classList.add("active");
         // console.log(data);
-        renderWeatherInfo(data);
+        renderdata(data);
 
     }catch(err){
 
